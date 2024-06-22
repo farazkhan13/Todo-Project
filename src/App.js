@@ -11,6 +11,7 @@ function App() {
   const [todoItem, setTodoItem] = useState("")
 
   useEffect(() => {
+    console.log('todoList updatede', todoList)
     localStorage.setItem("ITEMS", JSON.stringify(todoList))
   }, [todoList])
 
@@ -30,11 +31,11 @@ function App() {
     })
     setTodoItem("")
   }
-  function toggleChecked(id, completed) {
+  function toggleChecked(id, isCompleted) {
     setTodoList((prev) => {
       return prev.map((todo) => {
-        if (todoList.id === id) {
-          return { ...todoList, completed }
+        if (todo.id === id) {
+          return { ...todo, isCompleted }
         }
         return todo;
       })
@@ -64,7 +65,7 @@ function App() {
           return (
             <li key={todo.id}>
               <label>
-                <input type='checkbox' checked={todo.Completed}
+                <input type='checkbox' checked={todo.isCompleted}
                   onChange={e => toggleChecked(todo.id, e.target.checked)}>
                 </input>
                 {todo.value}
